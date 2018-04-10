@@ -48,7 +48,8 @@ public class SWE_GetInfos extends javax.swing.JFrame {
         rb_FiveProd = new javax.swing.JRadioButton();
         rb_AnzBestellWoche = new javax.swing.JRadioButton();
         rb_BestellwertWoche = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        btn_OK = new javax.swing.JButton();
+        btn_Update = new javax.swing.JButton();
         btn_Exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,10 +104,17 @@ public class SWE_GetInfos extends javax.swing.JFrame {
         buttonGroup1.add(rb_BestellwertWoche);
         rb_BestellwertWoche.setText("Bestellwert pro Möbelhaus in Kalenderwoche");
 
-        jButton1.setText("Go");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_OK.setText("Go");
+        btn_OK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_OKActionPerformed(evt);
+            }
+        });
+
+        btn_Update.setText("Update");
+        btn_Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_UpdateActionPerformed(evt);
             }
         });
 
@@ -116,7 +124,7 @@ public class SWE_GetInfos extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(rb_BestellwertWoche)
                     .addComponent(rb_AnzBestellWoche)
                     .addComponent(rb_FiveProd)
@@ -137,12 +145,14 @@ public class SWE_GetInfos extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txt_Hersteller, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                                 .addComponent(txt_Haus)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txt_Bis, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_Von, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)))
+                                .addComponent(txt_Bis)
+                                .addComponent(txt_Von, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
                             .addComponent(txt_Woche, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(rb_AnzMHaus)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btn_Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -187,7 +197,9 @@ public class SWE_GetInfos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rb_BestellwertWoche)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_OK)
+                    .addComponent(btn_Update))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -225,14 +237,16 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExitActionPerformed
-        //Exit.Exit();
         System.exit(0);
     }//GEN-LAST:event_btn_ExitActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                  
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btn_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OKActionPerformed
+        //Get the Informations from SQL
+    }//GEN-LAST:event_btn_OKActionPerformed
+
+    private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
+        Update.Update();  //Update infos from Json
+    }//GEN-LAST:event_btn_UpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,8 +283,9 @@ public class SWE_GetInfos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Exit;
+    private javax.swing.JButton btn_OK;
+    private javax.swing.JButton btn_Update;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_Bis;
     private javax.swing.JLabel lbl_Haus;
