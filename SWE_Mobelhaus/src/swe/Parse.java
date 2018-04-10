@@ -6,6 +6,7 @@
 package swe;
 
 //import org.json.simple.parser.JSONParser;
+import com.google.gson.Gson;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -13,6 +14,8 @@ import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import sun.net.www.http.HttpClient;
 
 /**
  *
@@ -22,23 +25,18 @@ public class Parse {
 
     public static void Parse() throws ParseException {
 
-        JSONParser parser = new JSONParser();
-        Object obj = parser.parse("{\"test\": \"sadasd\"}");
+        // JSONParser parser = new JSONParser();
+        // Object obj = parser.parse();
 
-        JSONObject jsonObject = (JSONObject) obj;
-        System.out.println("Json Obj " + jsonObject);
+        // JSONObject jsonObject = (JSONObject) obj;
+        // System.out.println("Json Obj " + jsonObject);
 
-        Mobelhaus test = jsonObject.;
-        //Put pr into database
+        //Get Json from API
+        //Http client = new HttpClient(arg0, arg1, arg2)
+        //string Json = client.get("appi/asdajsdlkj/")
 
-        String n = (String) jsonObject.get("n");
-        //Put n into database
-
-        String yst = (String) jsonObject.get("yst");
-        //Put yst into database
-
-        String wh = (String) jsonObject.get("wh");
-        //Put wh into database
-
+        Gson gson = new Gson();
+        Mobelhaus[] test = gson.fromJson(string, Mobelhaus[].class);
+        //Mobelhaus test = gson.fromJson("{\"adresse\":{\"ort\":\"Eschenbach LU\",\"plz\":6274,\"strasse\":\"Bundesstrasse 80\"},\"id\":566,\"kontakt\":{\"email\":\"info@mhegger.ch\",\"telefon\":\"041 855 66 77\"},\"moebelhausCode\":\"MH_EGGER_EBLU\",\"name\":\"Möbelhaus Egger AG\"}", Mobelhaus.class);
     }
 }

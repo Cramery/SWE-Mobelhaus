@@ -5,17 +5,25 @@
  */
 package swe;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author Cramery
  */
 public class Mobelhaus {
+    @SerializedName("id")
     public int Id;
+    @SerializedName("name")
     public String Name;
+    @SerializedName("moebelhausCode")
     public String Code;
-    public String Email;
-    public String Telefon;
+    @SerializedName("ort")
     public String Ort;
+    @SerializedName("plz")
     public String Plz;
+    @SerializedName("kontakt")
+    public Kontakt Kontakt;
+    @SerializedName("strasse")
     public String Strasse;
 }

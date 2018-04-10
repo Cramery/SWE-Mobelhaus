@@ -5,12 +5,14 @@
  */
 package swe;
 
+import org.json.simple.parser.ParseException;
+
 /**
  *
  * @author Cramery
  */
 public class Update {
-    public static void Update(){
+    public static void Update() throws ParseException{
         //Update Infos from JSON
         //++Get JSON from Website
         
