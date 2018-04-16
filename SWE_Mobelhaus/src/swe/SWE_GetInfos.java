@@ -5,6 +5,10 @@
  */
 package swe;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.simple.parser.ParseException;
+
 /**
  *
  * @author Cramery
@@ -245,7 +249,11 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_OKActionPerformed
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
-        Update.Update();  //Update infos from Json
+        try {
+            Update.Update();  //Update infos from Json
+        } catch (ParseException ex) {
+            Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_UpdateActionPerformed
 
     /**

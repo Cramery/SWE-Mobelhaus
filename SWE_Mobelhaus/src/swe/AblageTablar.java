@@ -11,15 +11,10 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author Cramery
  */
-public class Mobelhaus {
+public class AblageTablar {
+    @SerializedName("bezeichnung")
+    public String Bezeichnung;
     @SerializedName("id")
     public int Id;
-    @SerializedName("name")
-    public String Name;
-    @SerializedName("moebelhausCode")
-    public String Code;
-    @SerializedName("adresse")
-    public Adresse Adresse;
-    @SerializedName("kontakt")
-    public Kontakt Kontakt;
+    
 }
