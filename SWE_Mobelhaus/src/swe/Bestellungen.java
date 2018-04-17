@@ -14,8 +14,8 @@ import com.google.gson.annotations.SerializedName;
 public class Bestellungen {
     @SerializedName("besteller")
     public Mobelhaus Besteller;
-    //@SerializedName("")
-    //public String bestellposition;
+    @SerializedName("bestellungPositionListe")
+    public Produkttypen[] Bestellpositionen;
     @SerializedName("datum")
     public String Datum;
     @SerializedName("id")

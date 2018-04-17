@@ -5,6 +5,7 @@
  */
 package swe;
 
+import java.io.IOException;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -12,18 +13,22 @@ import org.json.simple.parser.ParseException;
  * @author Cramery
  */
 public class Update {
-    public static void Update() throws ParseException{
+    public static void Update() throws ParseException, IOException{
         //Update Infos from JSON
-        //++Get JSON from Website
-        
-        //--Get JSON from Website
+        //++Get JSON
+        Parse Parse = new Parse();
+//        Parse.GetJSON(URL);
+        //--Get JSON
         
         //++Parse JSON
-        ParseMobelhaus.ParseMobelhaus();
+        Parse.ParseBestellung();
+        Parse.ParseLieferung();
+        Mobelhaus test = Parse.ParseMobelhaus(null, null, ":8081/rmhr-fischer/ws/moebelhaus");
+        Parse.ParseProdukttyp();
         //--Parse JSON
         
         //++Write JSON to SQL
-        
+        //tbd
         //--Write JSON to SQL
         
     }

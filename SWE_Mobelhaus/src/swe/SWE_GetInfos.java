@@ -245,7 +245,25 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ExitActionPerformed
 
     private void btn_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OKActionPerformed
-        //Get the Informations from SQL
+        //If (txt_Hersteller.text in "Herstellernamen"){
+            
+        //}else{
+        //System.out.println("Bitte tragen sie einen Hersteller ein")
+        //}
+        //Later:Get the Informations from SQL
+        //Check which rb is selected
+        String URL;
+        //URL = abhängig vom rb und Werten
+        //Parser abhängig vom rb
+        //Parse.ParseBestellung();
+        //Parse.ParseLieferung();
+        //Parse.ParseMobelhaus();
+        //Parse.ParseProdukttyp();
+        //A01 = ParseMobelhaus, count
+        //A02 = ParseProdukttyp, count
+        //A03 = ParseBestellung, Sum Preis / count
+        //A04 = 
+        //A05 = ParseBestellung, SumPreis, get highest
     }//GEN-LAST:event_btn_OKActionPerformed
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed

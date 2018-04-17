@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
  * @author Cramery
  */
 public class Produkttypen {
-    @SerializedName("name")
+    @SerializedName("ablageTablar")
     public AblageTablar AblageTablar;
     @SerializedName("beschreibung")
     public String Beschreibung;
@@ -25,7 +25,7 @@ public class Produkttypen {
     @SerializedName("name")
     public String Name;
     @SerializedName("preis")
-    public double Kontakt;
+    public double Preis;
     @SerializedName("typCode")
     public String TypCode;
 }

@@ -16,8 +16,8 @@ public class Lieferung {
     public String Bemerkung;
     @SerializedName("bestellung")
     public Bestellungen Bestellung;
-    //@SerializedName("lieferungPositionListe")
-    //public String Email;
+    @SerializedName("lieferungPositionListe")
+    public Produkttypen[] LieferungenPositionListe;
     @SerializedName("datum")
     public String datum;
     @SerializedName("id")
