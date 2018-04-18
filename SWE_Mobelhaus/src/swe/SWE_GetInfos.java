@@ -5,8 +5,11 @@
  */
 package swe;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.RadioButton;
+import static javafx.scene.input.KeyCode.R;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -34,12 +37,11 @@ public class SWE_GetInfos extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lbl_Hersteller = new javax.swing.JLabel();
-        lbl_Haus = new javax.swing.JLabel();
+        lbl_HausName = new javax.swing.JLabel();
         lbl_Von = new javax.swing.JLabel();
         lbl_Bis = new javax.swing.JLabel();
         lbl_Woche = new javax.swing.JLabel();
-        txt_Hersteller = new javax.swing.JTextField();
-        txt_Haus = new javax.swing.JTextField();
+        txt_HausName = new javax.swing.JTextField();
         txt_Von = new javax.swing.JTextField();
         txt_Bis = new javax.swing.JTextField();
         txt_Woche = new javax.swing.JTextField();
@@ -54,6 +56,9 @@ public class SWE_GetInfos extends javax.swing.JFrame {
         rb_BestellwertWoche = new javax.swing.JRadioButton();
         btn_OK = new javax.swing.JButton();
         btn_Update = new javax.swing.JButton();
+        cb_Hersteller = new javax.swing.JComboBox<>();
+        lbl_HausCode = new javax.swing.JLabel();
+        txt_HausCode = new javax.swing.JTextField();
         btn_Exit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,7 +68,7 @@ public class SWE_GetInfos extends javax.swing.JFrame {
 
         lbl_Hersteller.setText("Möbelhersteller:");
 
-        lbl_Haus.setText("Möbelhaus:");
+        lbl_HausName.setText("Möbelhausname:");
 
         lbl_Von.setText("Zeitraum von:");
 
@@ -71,9 +76,12 @@ public class SWE_GetInfos extends javax.swing.JFrame {
 
         lbl_Woche.setText("Kalenderwoche:");
 
-        txt_Hersteller.setText("Möbelhersteller");
-
-        txt_Haus.setText("Möbelhaus");
+        txt_HausName.setText("Möbelhaus Name");
+        txt_HausName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_HausNameActionPerformed(evt);
+            }
+        });
 
         txt_Von.setText("01.01.2017");
 
@@ -122,41 +130,49 @@ public class SWE_GetInfos extends javax.swing.JFrame {
             }
         });
 
+        cb_Hersteller.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fischer", "Walker", "Zwissig" }));
+
+        lbl_HausCode.setText("Möbelhauscode:");
+
+        txt_HausCode.setText("Möbelhaus Code");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rb_BestellwertWoche)
                     .addComponent(rb_AnzBestellWoche)
-                    .addComponent(rb_FiveProd)
                     .addComponent(rb_DurchLieferzeit)
                     .addComponent(rb_DreiBestellwert)
                     .addComponent(rb_BestellwertZeit)
                     .addComponent(rb_DurchBestellwert)
                     .addComponent(rb_AnzProd)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_Hersteller)
-                            .addComponent(lbl_Haus)
-                            .addComponent(lbl_Von)
-                            .addComponent(lbl_Bis)
-                            .addComponent(lbl_Woche))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txt_Hersteller, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                .addComponent(txt_Haus)
-                                .addComponent(txt_Bis)
-                                .addComponent(txt_Von, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
-                            .addComponent(txt_Woche, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(rb_AnzMHaus)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btn_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(rb_FiveProd))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_OK, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(btn_Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lbl_HausCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_Hersteller, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_HausName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_Von, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_Bis, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_Woche, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_HausName)
+                            .addComponent(txt_Bis)
+                            .addComponent(txt_Von, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                            .addComponent(txt_Woche, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_Hersteller, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_HausCode))))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,11 +181,15 @@ public class SWE_GetInfos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_Hersteller)
-                    .addComponent(txt_Hersteller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_Hersteller, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_Haus)
-                    .addComponent(txt_Haus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_HausName)
+                    .addComponent(txt_HausName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_HausCode)
+                    .addComponent(txt_HausCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_Von)
@@ -204,7 +224,7 @@ public class SWE_GetInfos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_OK)
                     .addComponent(btn_Update))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         btn_Exit.setText("Exit");
@@ -232,7 +252,7 @@ public class SWE_GetInfos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Exit)
                 .addContainerGap())
         );
@@ -245,25 +265,34 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ExitActionPerformed
 
     private void btn_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OKActionPerformed
-        //If (txt_Hersteller.text in "Herstellernamen"){
+        //Check which Möbelhersteller
+        
+        //check which radiobutton is selected       
+        if (rb_AnzMHaus.isSelected()){
+            try {
+                Anforderungen.A01();
+            } catch (ParseException ex) {
+                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if (rb_AnzProd.isSelected()){
+        
+        }else if (rb_DurchBestellwert.isSelected()){
+ 
+        }else if (rb_BestellwertZeit.isSelected()){
             
-        //}else{
-        //System.out.println("Bitte tragen sie einen Hersteller ein")
-        //}
-        //Later:Get the Informations from SQL
-        //Check which rb is selected
-        String URL;
-        //URL = abhängig vom rb und Werten
-        //Parser abhängig vom rb
-        //Parse.ParseBestellung();
-        //Parse.ParseLieferung();
-        //Parse.ParseMobelhaus();
-        //Parse.ParseProdukttyp();
-        //A01 = ParseMobelhaus, count
-        //A02 = ParseProdukttyp, count
-        //A03 = ParseBestellung, Sum Preis / count
-        //A04 = 
-        //A05 = ParseBestellung, SumPreis, get highest
+        }else if (rb_DreiBestellwert.isSelected()){
+            
+        }else if (rb_DurchLieferzeit.isSelected()){
+            
+        }else if (rb_FiveProd.isSelected()){
+            
+        }else if (rb_AnzBestellWoche.isSelected()){
+            
+        }else if (rb_BestellwertWoche.isSelected()){
+            
+        }
     }//GEN-LAST:event_btn_OKActionPerformed
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
@@ -271,13 +300,19 @@ public class SWE_GetInfos extends javax.swing.JFrame {
             Update.Update();  //Update infos from Json
         } catch (ParseException ex) {
             Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_UpdateActionPerformed
+
+    private void txt_HausNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_HausNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_HausNameActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -312,9 +347,11 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     private javax.swing.JButton btn_OK;
     private javax.swing.JButton btn_Update;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cb_Hersteller;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_Bis;
-    private javax.swing.JLabel lbl_Haus;
+    private javax.swing.JLabel lbl_HausCode;
+    private javax.swing.JLabel lbl_HausName;
     private javax.swing.JLabel lbl_Hersteller;
     private javax.swing.JLabel lbl_Von;
     private javax.swing.JLabel lbl_Woche;
@@ -328,8 +365,8 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     private javax.swing.JRadioButton rb_DurchLieferzeit;
     private javax.swing.JRadioButton rb_FiveProd;
     private javax.swing.JTextField txt_Bis;
-    private javax.swing.JTextField txt_Haus;
-    private javax.swing.JTextField txt_Hersteller;
+    private javax.swing.JTextField txt_HausCode;
+    private javax.swing.JTextField txt_HausName;
     private javax.swing.JTextField txt_Von;
     private javax.swing.JTextField txt_Woche;
     // End of variables declaration//GEN-END:variables

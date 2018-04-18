@@ -30,7 +30,6 @@ public class Parse {
         HttpGet request = new HttpGet(baseUrl + url);
         HttpResponse response = client.execute(request);
         BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-        System.out.println("GET REQUEST");
         String line = "";
         while ((line = rd.readLine()) != null) {
             return line;
@@ -38,7 +37,7 @@ public class Parse {
         return null;
     }
 
-    public Mobelhaus ParseMobelhaus(String code, String name, String HerstellerUrl) throws ParseException, IOException {
+    public Mobelhaus[] ParseMobelhaus(String code, String name, String HerstellerUrl) throws ParseException, IOException {
         Gson gson = new Gson();
         String url = "";
         
@@ -50,26 +49,68 @@ public class Parse {
             url = HerstellerUrl;
         }
 
-        String asf = Get(url);
-        System.out.println(asf);
+        String mobelhausjson = Get(url);
         
-        return gson.fromJson(asf, Mobelhaus.class);
+        Mobelhaus[] mobelhaus = gson.fromJson(mobelhausjson, Mobelhaus[].class);
+        
+        return mobelhaus;
     }
 
-    public static void ParseProdukttyp() throws ParseException {
+    public Produkttypen[] ParseProdukttyp(String code, String HerstellerUrl) throws ParseException, IOException {
         Gson gson = new Gson();
-        Produkttypen produkt = gson.fromJson("{\"ablageTablar\":{\"bezeichnung\":\"R1-TC0\",\"id\":5},\"beschreibung\":\"Bettgestell mit Kopfteil, Braun\",\"id\":137,\"maximalerBestand\":50,\"minimalerBestand\":1,\"name\":\"Bett\",\"preis\":390.0,\"typCode\":\"BTTG-Malm-5122\"}", Produkttypen.class
-        );
-        System.out.println(produkt.Id);
+        String url = "";
+        
+        if (code != null) {
+            url = HerstellerUrl + "/typ/code" + code;
+        } else {
+            url = HerstellerUrl;
+        }
+
+        String produktjson = Get(url);
+        
+        Produkttypen[] produkttypen = gson.fromJson(produktjson, Produkttypen[].class);
+        
+        return produkttypen;
     }
 
-    public static void ParseBestellung() throws ParseException {
+    public Bestellungen[] ParseBestellung(String code, String HerstellerUrl) throws ParseException, IOException {
         Gson gson = new Gson();
+        String url = "";
+       
+        url = HerstellerUrl + "code=" + code;
+
+        String bestellungenjson = Get(url);
+        System.out.println(bestellungenjson);
+        
+        Bestellungen[] bestellungen = gson.fromJson(bestellungenjson, Bestellungen[].class);
+        
+        return bestellungen;
 
     }
 
-    public static void ParseLieferung() throws ParseException {
+    public Lieferung[] ParseLieferung(String code, String HerstellerUrl) throws ParseException, IOException {
         Gson gson = new Gson();
+        String url = "";
+       
+        url = HerstellerUrl + "code=" + code;
 
+        String lieferungjson = Get(url);
+        
+        Lieferung[] lieferung = gson.fromJson(lieferungjson, Lieferung[].class);
+        
+        return lieferung;
+    }
+    
+    public Lagerbestand[] ParseLagerbestand(String code, String HerstellerUrl) throws ParseException, IOException {
+        Gson gson = new Gson();
+        String url = "";
+       
+        url = HerstellerUrl + "/code/" + code;
+
+        String lagerbestandjson = Get(url);
+        
+        Lagerbestand[] lagerbestand = gson.fromJson(lagerbestandjson, Lagerbestand[].class);
+        
+        return lagerbestand;
     }
 }

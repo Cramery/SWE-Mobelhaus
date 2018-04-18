@@ -21,10 +21,11 @@ public class Update {
         //--Get JSON
         
         //++Parse JSON
-        Parse.ParseBestellung();
-        Parse.ParseLieferung();
-        Mobelhaus test = Parse.ParseMobelhaus(null, null, ":8081/rmhr-fischer/ws/moebelhaus");
-        Parse.ParseProdukttyp();
+        Bestellungen bestellungen[] = Parse.ParseBestellung("MH_DIGA_EMME", ":8081/rmhr-fischer/ws/bestellung/moebelhaus?"); //Code darf nicht null sein, muss noch hier implementiert werden
+        Lieferung lieferung[] = Parse.ParseLieferung("MH_DIGA_EMME", ":8081/rmhr-fischer/ws/lieferung/moebelhaus?"); //Code siehe oben
+        Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, ":8081/rmhr-fischer/ws/moebelhaus");
+        Produkttypen produkttypen[] = Parse.ParseProdukttyp(null, ":8081/rmhr-fischer/ws/katalog");
+        Lagerbestand lagerbestand[] = Parse.ParseLagerbestand("MH_DIGA_EMME", ":8081/rmhr-fischer/ws/katalog/lagerbestand/typ"); //Code siehe oben
         //--Parse JSON
         
         //++Write JSON to SQL
