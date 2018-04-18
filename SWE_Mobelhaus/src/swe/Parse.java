@@ -105,8 +105,9 @@ public class Parse {
         Gson gson = new Gson();
         String url = "";
        
-        url = HerstellerUrl + "/code/" + code;
-
+        //url = HerstellerUrl + "/code/" + code;
+        url = "http://10.177.1.94:8081/rmhr-fischer/ws/katalog/lagerbestand/typ/code/BTTG-Malm-5122";
+        
         String lagerbestandjson = Get(url);
         
         Lagerbestand[] lagerbestand = gson.fromJson(lagerbestandjson, Lagerbestand[].class);

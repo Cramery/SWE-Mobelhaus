@@ -8,8 +8,6 @@ package swe;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.control.RadioButton;
-import static javafx.scene.input.KeyCode.R;
 import org.json.simple.parser.ParseException;
 
 /**
@@ -266,29 +264,33 @@ public class SWE_GetInfos extends javax.swing.JFrame {
 
     private void btn_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OKActionPerformed
         //Check which Möbelhersteller
-        String herstellerURL = "";
+        String herstellerUrl = ":8081/rmhr-fischer/ws/moebelhaus";
         
         //Fill variables from GUI
-        String mobelhausCode = "";
-        String mobelhausName = "";
+        String mobelhausCode = null;
+        String mobelhausName = null;
+        switch (cb_Hersteller.getSelectedIndex()) {
+            case 0:
+                herstellerUrl = ":8081/rmhr-fischer";
+                break;
+            case 1: 
+                herstellerUrl = ":8082/rmhr-walker";
+                break;
+            case 2:
+                herstellerUrl = ":8083/rmhr-zwissig";
+                break;
+        }
         
         //check which radiobutton is selected       
         if (rb_AnzMHaus.isSelected()){
+            herstellerUrl = herstellerUrl + "/ws/moebelhaus";
             try {
-                Anforderungen.A01(mobelhausCode, mobelhausName, herstellerURL);
-            } catch (ParseException ex) {
-                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
+                Anforderungen.A01(herstellerUrl);
+            } catch (ParseException | IOException ex) {
                 Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if (rb_AnzProd.isSelected()){
-            try {
-                Anforderungen.A02(herstellerURL);
-            } catch (ParseException ex) {
-                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         }else if (rb_DurchBestellwert.isSelected()){
  
         }else if (rb_BestellwertZeit.isSelected()){
@@ -309,9 +311,7 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
         try {
             Update.Update();  //Update infos from Json
-        } catch (ParseException ex) {
-            Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (ParseException | IOException ex) {
             Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_UpdateActionPerformed
@@ -323,7 +323,7 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
