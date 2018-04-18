@@ -283,7 +283,7 @@ public class SWE_GetInfos extends javax.swing.JFrame {
         
         //check which radiobutton is selected       
         if (rb_AnzMHaus.isSelected()){
-            herstellerUrl = herstellerUrl + "/ws/moebelhaus";
+            herstellerUrl = herstellerUrl + "/ws/moebelhaus";         //Same part for all in this case
             try {
                 Anforderungen.A01(herstellerUrl);
             } catch (ParseException | IOException ex) {
