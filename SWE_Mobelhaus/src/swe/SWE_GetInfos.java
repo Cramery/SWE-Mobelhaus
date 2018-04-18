@@ -266,18 +266,29 @@ public class SWE_GetInfos extends javax.swing.JFrame {
 
     private void btn_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_OKActionPerformed
         //Check which Möbelhersteller
+        String herstellerURL = "";
+        
+        //Fill variables from GUI
+        String mobelhausCode = "";
+        String mobelhausName = "";
         
         //check which radiobutton is selected       
         if (rb_AnzMHaus.isSelected()){
             try {
-                Anforderungen.A01();
+                Anforderungen.A01(mobelhausCode, mobelhausName, herstellerURL);
             } catch (ParseException ex) {
                 Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if (rb_AnzProd.isSelected()){
-        
+            try {
+                Anforderungen.A02(herstellerURL);
+            } catch (ParseException ex) {
+                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else if (rb_DurchBestellwert.isSelected()){
  
         }else if (rb_BestellwertZeit.isSelected()){

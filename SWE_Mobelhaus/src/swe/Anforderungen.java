@@ -14,9 +14,40 @@ import org.json.simple.parser.ParseException;
  */
 public class Anforderungen {
     
-    public static void A01() throws ParseException, IOException{
+    public static void A01(String code, String name, String herstellerUrl) throws ParseException, IOException{
         Parse Parse = new Parse();
-        Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, ":8081/rmhr-fischer/ws/moebelhaus");
-        
+        Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, herstellerUrl);
+    }
+    
+    public static void A02(){
+    
+    }
+    
+    public static void A03(){
+    
+    }
+    
+    public static void A04(){
+    
+    }
+    
+    public static void A05(){
+    
+    }
+    
+    public static void A06(){
+    
+    }
+    
+    public static void A07(){
+    
+    }
+    
+    public static void A08(){
+    
+    }
+    
+    public static void A09(){
+    
     }
 }
