@@ -22,8 +22,11 @@ public class Anforderungen {
         JOptionPane.showMessageDialog(null,Integer.toString(AnzMobelhauser),"A01 - Mobelhauser",JOptionPane.INFORMATION_MESSAGE);
     }
     
-    public static void A02(){
-    
+    public static void A02(String herstellerUrl) throws ParseException, IOException{
+        Parse Parse = new Parse();
+        Produkttypen produkttypen[] = Parse.ParseProdukttyp(null, herstellerUrl);
+        int AnzPodukttypen = produkttypen.length;
+        JOptionPane.showMessageDialog(null,Integer.toString(AnzPodukttypen),"A02 - AnzPodukttypen",JOptionPane.INFORMATION_MESSAGE);
     }
         
     public static void A03(){
@@ -37,6 +40,7 @@ public class Anforderungen {
     public static void A05(){
     
     }
+    
     public static void A06(){
     
     }

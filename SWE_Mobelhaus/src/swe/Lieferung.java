@@ -17,7 +17,7 @@ public class Lieferung {
     @SerializedName("bestellung")
     public Bestellungen Bestellung;
     @SerializedName("lieferungPositionListe")
-    public Produkttypen[] LieferungenPositionListe;
+    public BestellPosition[] LieferungPositionListe;
     @SerializedName("datum")
     public String datum;
     @SerializedName("id")

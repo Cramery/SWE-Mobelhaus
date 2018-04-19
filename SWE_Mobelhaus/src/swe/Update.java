@@ -25,8 +25,8 @@ public class Update {
         Lieferung lieferung[] = Parse.ParseLieferung("MH_DIGA_EMME", ":8081/rmhr-fischer/ws/lieferung/moebelhaus?"); //Code siehe oben
         Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, ":8081/rmhr-fischer/ws/moebelhaus");
         Produkttypen produkttypen[] = Parse.ParseProdukttyp(null, ":8081/rmhr-fischer/ws/katalog");
+        System.out.println("hall");
         //Lagerbestand lagerbestand[] = Parse.ParseLagerbestand("MH_DIGA_EMME", ":8081/rmhr-fischer/ws/katalog/lagerbestand/typ"); //Code siehe oben
-        System.out.println("hallo");
         //--Parse JSON
         
         //++Write JSON to SQL

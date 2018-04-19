@@ -15,7 +15,8 @@ public class Bestellungen {
     @SerializedName("besteller")
     public Mobelhaus Besteller;
     @SerializedName("bestellungPositionListe")
-    public Produkttypen[] Bestellpositionen;
+    public BestellPosition[] Bestellpositionen;
+    //public Produkttypen[] Bestellpositionen = Parse.ParseProdukttyp(null, ":8081/rmhr-fischer/ws/katalog");
     @SerializedName("datum")
     public String Datum;
     @SerializedName("id")

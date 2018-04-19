@@ -290,6 +290,12 @@ public class SWE_GetInfos extends javax.swing.JFrame {
                 Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else if (rb_AnzProd.isSelected()){
+            herstellerUrl = herstellerUrl + "/ws/katalog";
+            try {
+                Anforderungen.A02(herstellerUrl);
+            } catch (ParseException | IOException ex) {
+                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }else if (rb_DurchBestellwert.isSelected()){
  
