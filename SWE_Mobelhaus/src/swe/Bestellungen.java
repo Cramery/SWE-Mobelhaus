@@ -6,6 +6,7 @@
 package swe;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Date;
 
 /**
  *
@@ -18,7 +19,7 @@ public class Bestellungen {
     public BestellPosition[] Bestellpositionen;
     //public Produkttypen[] Bestellpositionen = Parse.ParseProdukttyp(null, ":8081/rmhr-fischer/ws/katalog");
     @SerializedName("datum")
-    public String Datum;
+    public Date Datum;
     @SerializedName("id")
     public int Id;
 }
