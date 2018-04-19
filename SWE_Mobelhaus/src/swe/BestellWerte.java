@@ -13,5 +13,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class BestellWerte {
     public String Code;
+    public double GWert;
+    public int Counter;
     public double Wert;
 }

@@ -30,29 +30,45 @@ public class Anforderungen {
         JOptionPane.showMessageDialog(null,Integer.toString(AnzPodukttypen),"A02 - AnzPodukttypen",JOptionPane.INFORMATION_MESSAGE);
     }
         
-    public static void A03(String baseUrl, String herstellerUrl) throws ParseException, IOException{
+    public static void A03(String baseUrl, String herstellerUrl) throws ParseException, IOException{ //Fals ziit, chamer hie statt de Code au de name usgäh
         Parse Parse = new Parse();        
         String code = "";        
-        
+        String infoMessage = "";
         //Get all Mobelhauser
         Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, herstellerUrl);
         
-        herstellerUrl = baseUrl + "/ws/bestellung/moebelhaus?" ; //grund URL war nicht drinnen (nochem mettag denn)
+        herstellerUrl = baseUrl + "/ws/bestellung/moebelhaus?"; 
+        BestellWerte[] bestellwerte = new BestellWerte[mobelhaus.length];
         for (int i = 0; i < mobelhaus.length; i++){     
             //++Get Bestellungen und Wert for each Mobelhaus
             code = mobelhaus[i].Code;
             Bestellungen bestellungen[] = Parse.ParseBestellung(code, herstellerUrl); 
-            BestellWerte[] bestellwerte = new BestellWerte[mobelhaus.length];
-            //bestellwerte[i].Code = mobelhaus[i].Code;
+            bestellwerte[i] = new BestellWerte();
+            bestellwerte[i].Code = mobelhaus[i].Code;
             
             for(int j = 0; j < bestellungen.length; j++){
                 for(int y = 0; y < bestellungen[j].Bestellpositionen.length; y++){
-                    bestellwerte[i].Wert += bestellungen[j].Bestellpositionen[y].Produkttyp.Preis;
+                    bestellwerte[i].GWert += bestellungen[j].Bestellpositionen[y].Produkttyp.Preis;
                 }
+                bestellwerte[i].Counter++;                   //Anzahl Bestellungen to calculate avarege
             }
             
-            //--Get Bestellungen und Wert for each Mobelhaus
+            //--Get Bestellungen und Gesamtwert for each Mobelhaus
         }
+        
+        //Calculate Avarege
+        for (int i = 0; i < bestellwerte.length; i++){
+            bestellwerte[i].Wert = bestellwerte[i].GWert / bestellwerte[i].Counter;
+            bestellwerte[i].Wert = Math.round(bestellwerte[i].Wert*100)/100.0;
+        }
+        
+        for (int i = 0; i < bestellwerte.length; i++){
+            infoMessage = infoMessage + bestellwerte[i].Code + ": " + Double.toString(bestellwerte[i].Wert) + "<br>" ;
+        }
+        infoMessage = "<html>" + infoMessage + "</html>";  //To break the lines
+        
+        JOptionPane.showMessageDialog(null, infoMessage,"A03 - Durchschnittliche Bestellwerte",JOptionPane.INFORMATION_MESSAGE);
+        
     }
             
     public static void A04(){

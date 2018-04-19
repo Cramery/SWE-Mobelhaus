@@ -80,7 +80,6 @@ public class Parse {
         url = HerstellerUrl + "code=" + code;
 
         String bestellungenjson = Get(url);
-        System.out.println(bestellungenjson);
         
         Bestellungen[] bestellungen = gson.fromJson(bestellungenjson, Bestellungen[].class);
         
