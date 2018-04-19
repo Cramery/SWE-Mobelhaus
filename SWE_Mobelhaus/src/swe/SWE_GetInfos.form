@@ -232,8 +232,11 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroup1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Anzahl Produkt-Typen von M&#xf6;belhaus"/>
+            <Property name="text" type="java.lang.String" value="Anzahl Produkt-Typen von M&#xf6;belhersteller"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rb_AnzProdActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rb_DurchBestellwert">
           <Properties>

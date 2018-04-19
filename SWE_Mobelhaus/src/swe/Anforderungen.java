@@ -5,6 +5,7 @@
  */
 package swe;
 
+import java.awt.List;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import org.json.simple.parser.ParseException;
@@ -15,9 +16,9 @@ import org.json.simple.parser.ParseException;
  */
 public class Anforderungen {
       
-    public static void A01(String herstellerURL) throws ParseException, IOException{
+    public static void A01(String herstellerUrl) throws ParseException, IOException{
         Parse Parse = new Parse();
-        Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, herstellerURL);
+        Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, herstellerUrl);  //tbd: String code/name übergeben
         int AnzMobelhauser = mobelhaus.length;
         JOptionPane.showMessageDialog(null,Integer.toString(AnzMobelhauser),"A01 - Mobelhauser",JOptionPane.INFORMATION_MESSAGE);
     }
@@ -29,8 +30,29 @@ public class Anforderungen {
         JOptionPane.showMessageDialog(null,Integer.toString(AnzPodukttypen),"A02 - AnzPodukttypen",JOptionPane.INFORMATION_MESSAGE);
     }
         
-    public static void A03(){
-    
+    public static void A03(String baseUrl, String herstellerUrl) throws ParseException, IOException{
+        Parse Parse = new Parse();        
+        String code = "";        
+        
+        //Get all Mobelhauser
+        Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, herstellerUrl);
+        
+        herstellerUrl = baseUrl + "/ws/bestellung/moebelhaus?" ; //grund URL war nicht drinnen (nochem mettag denn)
+        for (int i = 0; i < mobelhaus.length; i++){     
+            //++Get Bestellungen und Wert for each Mobelhaus
+            code = mobelhaus[i].Code;
+            Bestellungen bestellungen[] = Parse.ParseBestellung(code, herstellerUrl); 
+            BestellWerte[] bestellwerte = new BestellWerte[mobelhaus.length];
+            //bestellwerte[i].Code = mobelhaus[i].Code;
+            
+            for(int j = 0; j < bestellungen.length; j++){
+                for(int y = 0; y < bestellungen[j].Bestellpositionen.length; y++){
+                    bestellwerte[i].Wert += bestellungen[j].Bestellpositionen[y].Produkttyp.Preis;
+                }
+            }
+            
+            //--Get Bestellungen und Wert for each Mobelhaus
+        }
     }
             
     public static void A04(){

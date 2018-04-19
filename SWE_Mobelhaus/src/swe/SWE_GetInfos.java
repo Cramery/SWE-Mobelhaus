@@ -91,7 +91,12 @@ public class SWE_GetInfos extends javax.swing.JFrame {
         rb_AnzMHaus.setText("Anzahl Möbelhäsuer bei Möbelhersteller");
 
         buttonGroup1.add(rb_AnzProd);
-        rb_AnzProd.setText("Anzahl Produkt-Typen von Möbelhaus");
+        rb_AnzProd.setText("Anzahl Produkt-Typen von Möbelhersteller");
+        rb_AnzProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_AnzProdActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rb_DurchBestellwert);
         rb_DurchBestellwert.setText("Durchschnittliche Bestellwert pro Möbelhaus bei Möbelhersteller");
@@ -298,7 +303,14 @@ public class SWE_GetInfos extends javax.swing.JFrame {
             }
             
         }else if (rb_DurchBestellwert.isSelected()){
- 
+            String baseUrl = herstellerUrl;
+            herstellerUrl = herstellerUrl + "/ws/moebelhaus";
+            try {
+                Anforderungen.A03(baseUrl, herstellerUrl);
+            } catch (ParseException | IOException ex) {
+                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }else if (rb_BestellwertZeit.isSelected()){
             
         }else if (rb_DreiBestellwert.isSelected()){
@@ -325,6 +337,10 @@ public class SWE_GetInfos extends javax.swing.JFrame {
     private void txt_HausNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_HausNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_HausNameActionPerformed
+
+    private void rb_AnzProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_AnzProdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rb_AnzProdActionPerformed
 
     /**
      * @param args the command line arguments
