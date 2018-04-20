@@ -71,7 +71,45 @@ public class Anforderungen {
         
     }
             
-    public static void A04(){
+    public static void A04(String baseUrl, String herstellerUrl) throws ParseException, IOException{ //Fals ziit, chamer hie statt de Code au de name usgäh
+        Parse Parse = new Parse();        
+        String code = "";        
+        String infoMessage = "";
+        //Get all Mobelhauser
+        Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, herstellerUrl);
+        
+        herstellerUrl = baseUrl + "/ws/bestellung/moebelhaus?"; 
+        BestellWerte[] bestellwerte = new BestellWerte[mobelhaus.length];
+        for (int i = 0; i < mobelhaus.length; i++){     
+            //++Get Bestellungen und Wert for each Mobelhaus
+            code = mobelhaus[i].Code;
+            Bestellungen bestellungen[] = Parse.ParseBestellung(code, herstellerUrl); 
+            bestellwerte[i] = new BestellWerte();
+            bestellwerte[i].Code = mobelhaus[i].Code;
+            
+            for (Bestellungen bestellungen1 : bestellungen) {
+                for (BestellPosition Bestellpositionen : bestellungen1.Bestellpositionen) {
+                    //if (bestellungen[j].Datum >= 11111){  /TBD
+                    bestellwerte[i].GWert += Bestellpositionen.Produkttyp.Preis;
+                    //}
+                }
+                bestellwerte[i].Counter++;                   //Anzahl Bestellungen to calculate avarege
+            }
+            //--Get Bestellungen und Gesamtwert for each Mobelhaus
+        }
+        
+        //Calculate Avarege
+        for (BestellWerte bestellwert : bestellwerte) {
+            bestellwert.Wert = bestellwert.GWert / bestellwert.Counter;
+            bestellwert.Wert = Math.round(bestellwert.Wert * 100) / 100.0;
+        }
+        
+        for (BestellWerte bestellwert : bestellwerte) {
+            infoMessage = infoMessage + bestellwert.Code + ": " + Double.toString(bestellwert.Wert) + "<br>";
+        }
+        infoMessage = "<html>" + infoMessage + "</html>";  //To break the lines
+        
+        JOptionPane.showMessageDialog(null, infoMessage,"A03 - Durchschnittliche Bestellwerte",JOptionPane.INFORMATION_MESSAGE);
         
     }
                 
@@ -95,25 +133,23 @@ public class Anforderungen {
             bestellwerte[i] = new BestellWerte();
             bestellwerte[i].Code = mobelhaus[i].Code;
             
-            for(int j = 0; j < bestellungen.length; j++){
-                for(int y = 0; y < bestellungen[j].Bestellpositionen.length; y++){
-                    bestellwerte[i].GWert += bestellungen[j].Bestellpositionen[y].Produkttyp.Preis;
+            for (Bestellungen bestellungen1 : bestellungen) {
+                for (BestellPosition Bestellpositionen : bestellungen1.Bestellpositionen) {
+                    bestellwerte[i].GWert += Bestellpositionen.Produkttyp.Preis;
                 }
-                
             }
-            
             //--Get Bestellungen und Gesamtwert for each Mobelhaus
         }
         
         //Get three highest
-        for (int i = 0; i < bestellwerte.length; i++) {
-           if(bestellwerte[i].GWert > besterBesteller.GWert){
-               besterBesteller = bestellwerte[i];
-           }else if(bestellwerte[i].GWert > zweiterBesteller.GWert){
-               zweiterBesteller = bestellwerte[i];
-           }else if(bestellwerte[i].GWert > dritterBesteller.GWert){
-               dritterBesteller = bestellwerte[i];
-           }
+        for (BestellWerte bestellwerte1 : bestellwerte) {
+            if (bestellwerte1.GWert > besterBesteller.GWert) {
+                besterBesteller = bestellwerte1;
+            } else if (bestellwerte1.GWert > zweiterBesteller.GWert) {
+                zweiterBesteller = bestellwerte1;
+            } else if (bestellwerte1.GWert > dritterBesteller.GWert) {
+                dritterBesteller = bestellwerte1;
+            }
         }
         
         infoMessage = "<html>" +
@@ -122,12 +158,33 @@ public class Anforderungen {
                 "3. Bester Besteller: " + dritterBesteller.Code + ": " + dritterBesteller.GWert + "<br>" +
                 "</html>";  //To break the lines
         
-        JOptionPane.showMessageDialog(null, infoMessage,"A03 - Durchschnittliche Bestellwerte",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, infoMessage,"A05 - Grösste Bestellvolumen",JOptionPane.INFORMATION_MESSAGE);
 
     }
     
-    public static void A06(){
-    
+    public static void A06(String baseUrl, String herstellerUrl) throws ParseException, IOException{
+        Parse Parse = new Parse();        
+        int counter = 0;
+        double gesamtLieferzeit = 0;
+        double durchLieferzeit = 0;
+        //Get all Mobelhauser
+        Mobelhaus mobelhaus[] = Parse.ParseMobelhaus(null, null, herstellerUrl);
+        
+        herstellerUrl = baseUrl + "/ws/lieferung/moebelhaus?"; 
+        for (Mobelhaus mobelhaus1 : mobelhaus) {
+            Lieferung[] lieferungen = Parse.ParseLieferung(mobelhaus1.Code, herstellerUrl); 
+            for (Lieferung lieferung : lieferungen) {
+                long diff = lieferung.datum.getTime() - lieferung.Bestellung.Datum.getTime(); //getDate beachted nur den Tag aber nicht das gesamte Datum (23.03 > 21.04)
+                diff = diff / 1000 / 60 / 60 / 24;
+                gesamtLieferzeit = gesamtLieferzeit + diff;
+                counter++;
+            }
+        }
+        
+        durchLieferzeit = gesamtLieferzeit / counter;
+        durchLieferzeit = Math.round(durchLieferzeit * 100) / 100.0;
+        JOptionPane.showMessageDialog(null, "Die Durchschnittliche Lieferzeit beträgt: " + Double.toString(durchLieferzeit) + " Tage", "A06 - Durchschnittliche Lieferzeit", JOptionPane.INFORMATION_MESSAGE);       
+        
     }
         
     public static void A07(){

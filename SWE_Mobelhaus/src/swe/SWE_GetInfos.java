@@ -312,6 +312,13 @@ public class SWE_GetInfos extends javax.swing.JFrame {
             }
             
         }else if (rb_BestellwertZeit.isSelected()){
+            String baseUrl = herstellerUrl;
+            herstellerUrl = herstellerUrl + "/ws/moebelhaus";
+            try {
+                Anforderungen.A04(baseUrl, herstellerUrl);
+            } catch (ParseException | IOException ex) {
+                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         }else if (rb_DreiBestellwert.isSelected()){
             String baseUrl = herstellerUrl;
@@ -324,6 +331,15 @@ public class SWE_GetInfos extends javax.swing.JFrame {
             }
             
         }else if (rb_DurchLieferzeit.isSelected()){
+            String baseUrl = herstellerUrl;
+            herstellerUrl = herstellerUrl + "/ws/moebelhaus";
+            
+            try {
+                Anforderungen.A06(baseUrl, herstellerUrl);
+            } catch (ParseException | IOException ex) {
+                Logger.getLogger(SWE_GetInfos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             
         }else if (rb_FiveProd.isSelected()){
             

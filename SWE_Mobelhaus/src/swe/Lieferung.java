@@ -6,6 +6,7 @@
 package swe;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.Date;
 
 /**
  *
@@ -19,7 +20,7 @@ public class Lieferung {
     @SerializedName("lieferungPositionListe")
     public BestellPosition[] LieferungPositionListe;
     @SerializedName("datum")
-    public String datum;
+    public Date datum;
     @SerializedName("id")
     public int Id;
     @SerializedName("unvollstaendig")
