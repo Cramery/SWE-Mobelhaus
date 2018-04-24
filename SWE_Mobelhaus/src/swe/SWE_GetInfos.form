@@ -96,12 +96,12 @@
                           </Group>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txt_HausName" max="32767" attributes="0"/>
-                              <Component id="txt_Bis" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txt_Von" alignment="0" pref="138" max="32767" attributes="0"/>
+                              <Component id="txt_HausName" pref="138" max="32767" attributes="0"/>
                               <Component id="txt_Woche" min="-2" pref="39" max="-2" attributes="0"/>
                               <Component id="cb_Hersteller" alignment="0" max="32767" attributes="0"/>
                               <Component id="txt_HausCode" alignment="0" max="32767" attributes="0"/>
+                              <Component id="dp_Von" alignment="0" max="32767" attributes="0"/>
+                              <Component id="dp_Bis" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -130,12 +130,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lbl_Von" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_Von" min="-2" max="-2" attributes="0"/>
+                      <Component id="dp_Von" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lbl_Bis" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_Bis" min="-2" max="-2" attributes="0"/>
+                      <Component id="dp_Bis" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -203,19 +203,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_HausNameActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txt_Von">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="01.01.2017"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txt_Bis">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="01.01.2018"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_Woche">
           <Properties>
@@ -336,6 +323,10 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="M&#xf6;belhaus Code"/>
           </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXDatePicker" name="dp_Von">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXDatePicker" name="dp_Bis">
         </Component>
       </SubComponents>
     </Container>
