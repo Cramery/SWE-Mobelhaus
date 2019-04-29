@@ -1,0 +1,16 @@
+/* AUTOMATICALLY GENERATED ON Sun May 13 14:13:44 CEST 2018*/
+/* DO NOT EDIT */
+
+
+
+grant  {
+  
+permission java.security.AllPermission;
+permission java.net.SocketPermission "*:1099-5000", "connect, accept";
+  
+permission java.net.SocketPermission "192.168.38.1:*", "connect, accept";
+ 
+ permission java.net.SocketPermission "127.0.0.1:*", "connect, accept";
+
+};
+
